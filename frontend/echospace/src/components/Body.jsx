@@ -15,7 +15,7 @@ function Body() {
     const [recentComments, setRecentComments] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8888/api/posts')
+        axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/api/posts`)
             .then(res => {
                 setPosts(res.data);
                 setLoading(false);
@@ -50,7 +50,7 @@ function Body() {
         setCommentText('');
         setCommentAnonymous(false);
         try {
-            const res = await axios.post('http://localhost:8888/api/posts/comments', {
+            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/api/posts/comments`, {
                 postID: selectedPost.postID,
                 name: optimisticComment.name,
                 comment: optimisticComment.comment
@@ -88,7 +88,7 @@ function Body() {
                                         className="bg-green-600 w-full text-white p-2 rounded hover:bg-green-700"
                                         onClick={() => openCommentModal(post)}
                                     >
-                                        comment
+                                        comment ({post.comments.length})
                                     </button>
                                 </div>
                             </div>

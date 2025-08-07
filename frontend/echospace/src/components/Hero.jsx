@@ -37,7 +37,7 @@ function Hero() {
         setLoading(true);
 
         try {
-            const res = await axios.post('http://localhost:8888/api/create', optimisticPost);
+            const res = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/api/create`, optimisticPost);
             if (res.status !== 201) throw new Error(res.data.message || 'โพสต์ไม่สำเร็จ');
         } catch (err) {
             setError(err.response?.data?.message || err.message);
